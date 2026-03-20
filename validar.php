@@ -34,7 +34,7 @@ if ($datos) {
         $_SESSION['id_rol'] = $datos['id_rol'];
         $_SESSION['email'] = $datos['email'];
         
-        header('Location: ADMIN/usuarios.php');
+        header('Location: ADMIN/admin.php');
     } else if ($datos['estado'] != 'Activo') {
         // Usuario inactivo
         $_SESSION['msg'] = "Usuario inactivo. Contacte al administrador";

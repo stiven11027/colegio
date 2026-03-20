@@ -2,7 +2,9 @@
 
 include '../ASSETS/conexion.php';
 
-$docu = $_POST['documento'];
+if(!isset($_POST['documento'])) die('Documento no especificado');
+
+$id = intval($_POST['documento']);
 $nombres = mysqli_real_escape_string($conexion, trim($_POST['up_nombres']));
 $apellidos = mysqli_real_escape_string($conexion, trim($_POST['up_apellidos'] ?? ''));
 $email = mysqli_real_escape_string($conexion, trim($_POST['up_email'] ?? ''));
@@ -12,22 +14,9 @@ $pas = !empty($_POST['up_pass']) ? mysqli_real_escape_string($conexion, $_POST['
 
 // Si la contraseña está vacía, mantener la actual
 if(empty($pas)) {
-    $update = "UPDATE usuario set 
-    nombres = '$nombres',
-    apellidos = '$apellidos',
-    email = '$email',
-    id_rol = '$id_rol',
-    estado = '$estado'
-    where ID = '$id'";
+    $update = "UPDATE usuario SET nombres='$nombres', apellidos='$apellidos', email='$email', id_rol=$id_rol, estado='$estado' WHERE ID=$id";
 } else {
-    $update = "UPDATE usuario set 
-    nombres = '$nombres',
-    apellidos = '$apellidos',
-    email = '$email',
-    id_rol = '$id_rol',
-    estado = '$estado',
-    pass = '$pas'
-    where ID = '$id'";
+    $update = "UPDATE usuario SET nombres='$nombres', apellidos='$apellidos', email='$email', id_rol=$id_rol, estado='$estado', pass='$pas' WHERE ID=$id";
 }
 $exe_update = mysqli_query($conexion, $update);
 if(!$exe_update)

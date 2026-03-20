@@ -109,7 +109,12 @@ if($_SESSION['doc'] === '' || $_SESSION['doc'] === null || $_SESSION['id_rol'] !
                                         <td><?php echo $data_usu['ID']?></td>
                                         <td><?php echo $data_usu['nombres'] . ' ' . $data_usu['apellidos']?></td>
                                         <td><?php echo $data_usu['email']?></td>
-                                        <td><span class="badge bg-info"><?php echo $data_usu['nombre_rol']?></span></td>
+                                        <td>
+                                            <?php 
+                                                $roles = array(1 => 'Administrador', 2 => 'Profesor', 3 => 'Estudiante', 4 => 'Acudiente');
+                                                echo '<span class="badge bg-info">' . $roles[$data_usu['id_rol']] . '</span>';
+                                            ?>
+                                        </td>
                                         <td>
                                             <?php 
                                                 if($data_usu['estado'] == 'Activo') {
@@ -123,25 +128,6 @@ if($_SESSION['doc'] === '' || $_SESSION['doc'] === null || $_SESSION['id_rol'] !
                                         <td><a href="eliminar_usuario.php?doc=<?= $data_usu['ID']?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar usuario?');">Eliminar</a></td>
                                     </tr>  
                                 <?php } ?>
-
-                                    <tr>
-                                        <td><?php echo $data_usu['ID']?></td>
-                                        <td><?php echo $data_usu['nombres'] . ' ' . $data_usu['apellidos']?></td>
-                                        <td><?php echo $data_usu['email']?></td>
-                                        <td><span class="badge bg-info"><?php echo $data_usu['nombre_rol']?></span></td>
-                                        <td>
-                                            <?php 
-                                                if($data_usu['estado'] == 'Activo') {
-                                                    echo '<span class="badge bg-success">Activo</span>';
-                                                } else {
-                                                    echo '<span class="badge bg-danger">Inactivo</span>';
-                                                }
-                                            ?>
-                                        </td>                          
-                                        <td><a href="actualizar_usuario.php?doc=<?= $data_usu['ID']?>" class="btn btn-warning btn-sm">Editar</a></td>
-                                        <td><a href="eliminar_usuario.php?doc=<?= $data_usu['ID']?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar usuario?');">Eliminar</a></td>
-                                    </tr>  
-                                <?php  ?>
                             </tbody>
                         </table>
                     </div>

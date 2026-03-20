@@ -1,6 +1,13 @@
 <?php
 date_default_timezone_set('America/Bogota');
 session_start();
+
+// Logout
+if(isset($_GET['logout'])) {
+    session_destroy();
+    header('Location: index.php');
+    die;
+}
 ?>
 <html>
     <head>
